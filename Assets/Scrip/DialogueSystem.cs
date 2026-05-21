@@ -184,6 +184,11 @@ private bool isEndingTriggered = false;
     private const string LAST_DIALOGUE_KEY = "LastDialogueID";
     private const string LAST_MONEY_KEY = "LastMoney";
     private const string LAST_MONTH_KEY = "LastMonth";
+
+    private string NormalizeDialogueID(string id)
+    {
+        return string.IsNullOrEmpty(id) ? id : id.Trim();
+    }
     
     private Dictionary<string, CharacterDisplayData> characterMap = new Dictionary<string, CharacterDisplayData>();
     private Color defaultChoiceTextColor = Color.black;
@@ -208,6 +213,14 @@ private bool isEndingTriggered = false;
                 }
                 charData.canvasGroup.alpha = 0f; 
                 charData.characterObject.SetActive(true); 
+                charData.canvasGroup.blocksRaycasts = false;
+                charData.canvasGroup.interactable = false;
+
+                foreach (Graphic graphic in charData.characterObject.GetComponentsInChildren<Graphic>(true))
+                {
+                    graphic.raycastTarget = false;
+                }
+
                 characterMap[charData.characterNameKey.Trim()] = charData; 
             }
             else
@@ -270,7 +283,7 @@ private bool isEndingTriggered = false;
         {
             // Kembali dari Mini Game
             PlayerPrefs.SetInt("ReturnFromMiniGame", 0);
-            targetID = PlayerPrefs.GetString("ReturnAfterMiniGameID", startID);
+            targetID = NormalizeDialogueID(PlayerPrefs.GetString("ReturnAfterMiniGameID", startID));
             Debug.Log($"INFO: Kembali dari MiniGame, melanjutkan ke ID: '{targetID}'");
 
             int miniScore = PlayerPrefs.GetInt("LastMiniGameScore", 0);
@@ -285,7 +298,7 @@ private bool isEndingTriggered = false;
         else if (PlayerPrefs.HasKey(LAST_DIALOGUE_KEY))
         {
             // Melanjutkan dialog terakhir
-            targetID = PlayerPrefs.GetString(LAST_DIALOGUE_KEY, startID);
+            targetID = NormalizeDialogueID(PlayerPrefs.GetString(LAST_DIALOGUE_KEY, startID));
             Debug.Log($"INFO: Melanjutkan dari save terakhir, ID: '{targetID}'");
         }
         else
@@ -305,6 +318,13 @@ private bool isEndingTriggered = false;
         UpdateMoneyUIInstant();
         UpdateMonthUI();
 
+        if (fadeImage == null)
+        {
+            GameObject fadeObject = GameObject.Find("FadeImage");
+            if (fadeObject != null)
+                fadeImage = fadeObject.GetComponent<Image>();
+        }
+
         if (fadeImage != null)
         {
             Color initialColor = fadeImage.color;
@@ -315,7 +335,7 @@ private bool isEndingTriggered = false;
         }
         else
         {
-            Debug.LogError("ERROR: Fade Image tidak diassign di Inspector!");
+            Debug.LogWarning("Fade Image tidak diassign di Inspector. Transisi fade awal dilewati.");
         }
 
         PlayMonthBGM(currentMonth);
@@ -359,6 +379,7 @@ private bool isEndingTriggered = false;
 
     public void ShowDialogueByID(string id)
     {
+        id = NormalizeDialogueID(id);
         isChoiceProcessing = false;
         Debug.Log($"ACTION: Mencoba menampilkan dialog dengan ID: '{id}'");
         currentDialogue = FindDialogueByID(id);
@@ -403,9 +424,11 @@ private bool isEndingTriggered = false;
 
     private DialogueLine FindDialogueByID(string id)
     {
+        id = NormalizeDialogueID(id);
         foreach (var line in dialogueLines)
         {
-            if (line.dialogueID.Equals(id, System.StringComparison.OrdinalIgnoreCase)) return line;
+            string lineID = NormalizeDialogueID(line.dialogueID);
+            if (lineID.Equals(id, System.StringComparison.OrdinalIgnoreCase)) return line;
         }
         return null;
     }
@@ -478,6 +501,7 @@ private bool isEndingTriggered = false;
                 if (btn == null) continue;
 
                 btn.gameObject.SetActive(true);
+                btn.transform.SetAsLastSibling();
 
                 // LOGIKA MOOD: Persyaratan
                 float heroineCurrentMood = GetHeroineMood(choice.requiredMoodHeroine);
@@ -501,12 +525,14 @@ private bool isEndingTriggered = false;
                     }
                 }
                 
-                btn.interactable = moodIsSufficient;
+                btn.interactable = true;
                 
                 btn.onClick.RemoveAllListeners();
 
                 if (moodIsSufficient)
                 {
+                    DialogueChoice selectedChoice = choice;
+
                     void ExecuteChoiceAction(DialogueChoice choiceData)
                     {
                         // LOGIKA MOOD: Panggil MoodManager.ChangeMood
@@ -523,13 +549,13 @@ private bool isEndingTriggered = false;
 
                         if (choiceData.endOfMonth)
                         {
-                            StartCoroutine(FadeTransition(choiceData.nextDialogueID));
+                            StartCoroutine(FadeTransition(NormalizeDialogueID(choiceData.nextDialogueID)));
                             return; 
                         }
 
                         if (choiceData.triggerNormalTransition)
                         {
-                            StartCoroutine(NormalTransition(choiceData.nextDialogueID, choiceData.normalTransitionText));
+                            StartCoroutine(NormalTransition(NormalizeDialogueID(choiceData.nextDialogueID), choiceData.normalTransitionText));
                             return; 
                         }
 
@@ -542,10 +568,10 @@ if (choiceData.loadMiniGameScene)
     }
 
     PlayerPrefs.SetInt("ReturnFromMiniGame", 1);
-    PlayerPrefs.SetString(LAST_DIALOGUE_KEY, currentDialogue.dialogueID);
+    PlayerPrefs.SetString(LAST_DIALOGUE_KEY, NormalizeDialogueID(currentDialogue.dialogueID));
     PlayerPrefs.SetFloat(LAST_MONEY_KEY, currentMoney);
     PlayerPrefs.SetInt(LAST_MONTH_KEY, currentMonth);
-    PlayerPrefs.SetString("ReturnAfterMiniGameID", choiceData.returnDialogueAfterMiniGame);
+    PlayerPrefs.SetString("ReturnAfterMiniGameID", NormalizeDialogueID(choiceData.returnDialogueAfterMiniGame));
 
     moodManager.SaveMoods();
     PlayerPrefs.Save();
@@ -556,7 +582,7 @@ if (choiceData.loadMiniGameScene)
     return;
 }
                         
-                        ShowDialogueByID(choiceData.nextDialogueID);
+                        ShowDialogueByID(NormalizeDialogueID(choiceData.nextDialogueID));
                     }
 
                     btn.onClick.AddListener(() =>
@@ -572,12 +598,16 @@ if (choiceData.loadMiniGameScene)
             b.interactable = false;
     }
 
-    ExecuteChoiceAction(choice);
+    ExecuteChoiceAction(selectedChoice);
 });
                 }
                 else
                 {
                     string notification = ReplacePlayerName(choice.moodInsufficientMessage);
+                    if (string.IsNullOrWhiteSpace(notification))
+                    {
+                        notification = "Mood belum cukup untuk memilih pilihan ini.";
+                    }
                     btn.onClick.AddListener(() => ShowNotification(notification));
                 }
 
@@ -1028,6 +1058,12 @@ private IEnumerator TriggerEnding()
     private IEnumerator FadeCharacterImage(CanvasGroup cg, float targetAlpha)
     {
         if (cg == null) yield break;
+        if (targetAlpha <= 0.01f)
+        {
+            cg.blocksRaycasts = false;
+            cg.interactable = false;
+        }
+
         float duration = 0.5f; 
         float time = 0f;
         float startAlpha = cg.alpha;
