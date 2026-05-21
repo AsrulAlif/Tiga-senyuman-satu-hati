@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
@@ -14,7 +15,14 @@ public class AudioManager : MonoBehaviour
     public Slider bgmSlider;
     public Button resumeButton;
 
+    [Header("Button SFX")]
+    [Tooltip("Isi dengan suara klik tombol. Kosongkan kalau tidak ingin memakai efek tombol.")]
+    public AudioClip buttonClickSound;
+    [Range(0f, 1f)]
+    public float buttonClickVolume = 1f;
+
     private bool isPaused = false;
+    private AudioSource sfxSource;
 
     private void Awake()
     {
@@ -23,6 +31,8 @@ public class AudioManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            SetupButtonSfxSource();
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
         {
@@ -53,6 +63,14 @@ public class AudioManager : MonoBehaviour
 
         if (resumeButton != null)
             resumeButton.onClick.AddListener(ResumeGame);
+
+        AddButtonSfxToSceneButtons();
+    }
+
+    private void OnDestroy()
+    {
+        if (instance == this)
+            SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     void Update()
@@ -89,5 +107,51 @@ public class AudioManager : MonoBehaviour
             bgmSource.volume = volume;
             PlayerPrefs.SetFloat("BGMVolume", volume);
         }
+    }
+
+    public void PlayButtonClickSound()
+    {
+        if (buttonClickSound == null)
+            return;
+
+        if (sfxSource == null)
+            SetupButtonSfxSource();
+
+        sfxSource.PlayOneShot(buttonClickSound, buttonClickVolume);
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        AddButtonSfxToSceneButtons();
+    }
+
+    private void SetupButtonSfxSource()
+    {
+        sfxSource = GetComponent<AudioSource>();
+
+        if (sfxSource == null)
+            sfxSource = gameObject.AddComponent<AudioSource>();
+
+        sfxSource.playOnAwake = false;
+    }
+
+    private void AddButtonSfxToSceneButtons()
+    {
+        if (IsMiniGameScene())
+            return;
+
+        Button[] buttons = FindObjectsOfType<Button>(true);
+
+        foreach (Button button in buttons)
+        {
+            if (button != null && button.GetComponent<ButtonClickSfx>() == null)
+                button.gameObject.AddComponent<ButtonClickSfx>();
+        }
+    }
+
+    private bool IsMiniGameScene()
+    {
+        string sceneName = SceneManager.GetActiveScene().name.Replace(" ", "");
+        return sceneName.IndexOf("MiniGame", System.StringComparison.OrdinalIgnoreCase) >= 0;
     }
 }

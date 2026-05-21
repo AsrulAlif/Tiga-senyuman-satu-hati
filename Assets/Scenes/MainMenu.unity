@@ -894,7 +894,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -51.00006, y: 0}
+  m_AnchoredPosition: {x: -51, y: 0}
   m_SizeDelta: {x: -552, y: -312.44}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &416363069
@@ -3946,6 +3946,8 @@ MonoBehaviour:
   optionsPanel: {fileID: 1129628813}
   bgmSlider: {fileID: 1778863899}
   resumeButton: {fileID: 326839934}
+  buttonClickSound: {fileID: 8300000, guid: dda1fbee4bb6a5243b0e9c891e8d7c80, type: 3}
+  buttonClickVolume: 1
 --- !u!1 &2048529297
 GameObject:
   m_ObjectHideFlags: 0

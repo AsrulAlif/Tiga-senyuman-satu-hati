@@ -10651,7 +10651,7 @@ MonoBehaviour:
       returnDialogueAfterMiniGame: 
   - dialogueID: Miiyu Bulan 6 event part 4
     dialogueSteps:
-    - sentenceText: Seharus nya Rumah ku patokan nya taman ini
+    - sentenceText: Seharus nya rumah ku patokan nya taman ini
       voiceClip: {fileID: 0}
       speakingCharacterKey: Pemain
       activeCharacterKeys: 
@@ -21084,7 +21084,7 @@ MonoBehaviour:
       speakingCharacterKey: Hikari
       activeCharacterKeys: Hikari Biasa
       iconSprite: {fileID: 0}
-      backgroundImage: {fileID: 21300000, guid: f55b01f803d771548901bb361fe3bb04, type: 3}
+      backgroundImage: {fileID: 21300000, guid: 7f5483e24d566cc4b9ccf586e5935cf1, type: 3}
       changeBackground: 1
     - sentenceText: Hikari....
       voiceClip: {fileID: 8300000, guid: 972e6f94502e75e41afaeee18fc2dcb5, type: 3}
@@ -21098,7 +21098,7 @@ MonoBehaviour:
       speakingCharacterKey: Hikari
       activeCharacterKeys: Hikari Biasa
       iconSprite: {fileID: 0}
-      backgroundImage: {fileID: 21300000, guid: f55b01f803d771548901bb361fe3bb04, type: 3}
+      backgroundImage: {fileID: 21300000, guid: 7f5483e24d566cc4b9ccf586e5935cf1, type: 3}
       changeBackground: 1
     - sentenceText: Seriussan kenapa kamu tidak kasih tau aku
       voiceClip: {fileID: 8300000, guid: 972e6f94502e75e41afaeee18fc2dcb5, type: 3}
@@ -21112,7 +21112,7 @@ MonoBehaviour:
       speakingCharacterKey: Hikari
       activeCharacterKeys: Hikari Biasa
       iconSprite: {fileID: 0}
-      backgroundImage: {fileID: 21300000, guid: f55b01f803d771548901bb361fe3bb04, type: 3}
+      backgroundImage: {fileID: 21300000, guid: 7f5483e24d566cc4b9ccf586e5935cf1, type: 3}
       changeBackground: 1
     - sentenceText: Dan tiba tiba semua orang jadi sibuk dan aku jadi tidak bisa
         main dengan bebas
@@ -21120,7 +21120,7 @@ MonoBehaviour:
       speakingCharacterKey: Hikari
       activeCharacterKeys: Hikari Biasa
       iconSprite: {fileID: 0}
-      backgroundImage: {fileID: 21300000, guid: f55b01f803d771548901bb361fe3bb04, type: 3}
+      backgroundImage: {fileID: 21300000, guid: 7f5483e24d566cc4b9ccf586e5935cf1, type: 3}
       changeBackground: 1
     - sentenceText: jadi mungkin ini jadi kesempatan buat aku punya temen yang dapat
         nilai jelek nanti
@@ -21128,7 +21128,7 @@ MonoBehaviour:
       speakingCharacterKey: Hikari
       activeCharacterKeys: Hikari Biasa
       iconSprite: {fileID: 0}
-      backgroundImage: {fileID: 21300000, guid: f55b01f803d771548901bb361fe3bb04, type: 3}
+      backgroundImage: {fileID: 21300000, guid: 7f5483e24d566cc4b9ccf586e5935cf1, type: 3}
       changeBackground: 1
     - sentenceText: Haaah Hikari kenapa kamu ga bilang kita kan bisa belajar bareng
         kalau kamu mau
@@ -21143,21 +21143,21 @@ MonoBehaviour:
       speakingCharacterKey: Hikari
       activeCharacterKeys: Hikari Biasa
       iconSprite: {fileID: 0}
-      backgroundImage: {fileID: 21300000, guid: f55b01f803d771548901bb361fe3bb04, type: 3}
+      backgroundImage: {fileID: 21300000, guid: 7f5483e24d566cc4b9ccf586e5935cf1, type: 3}
       changeBackground: 1
     - sentenceText: Belajar bareng"(mata nya bersinar)"
       voiceClip: {fileID: 0}
       speakingCharacterKey: Hikari
       activeCharacterKeys: Hikari Biasa
       iconSprite: {fileID: 0}
-      backgroundImage: {fileID: 21300000, guid: f55b01f803d771548901bb361fe3bb04, type: 3}
+      backgroundImage: {fileID: 21300000, guid: 7f5483e24d566cc4b9ccf586e5935cf1, type: 3}
       changeBackground: 1
     - sentenceText: Serius kamu mau belajar bareng sama aku?
       voiceClip: {fileID: 0}
       speakingCharacterKey: Hikari
       activeCharacterKeys: Hikari Biasa
       iconSprite: {fileID: 0}
-      backgroundImage: {fileID: 21300000, guid: f55b01f803d771548901bb361fe3bb04, type: 3}
+      backgroundImage: {fileID: 21300000, guid: 7f5483e24d566cc4b9ccf586e5935cf1, type: 3}
       changeBackground: 1
     - sentenceText: Tentu saja kita bisa belajar bareng setelah kita makan dan sesudah
         sekolah di perpustakaan
@@ -21172,14 +21172,14 @@ MonoBehaviour:
       speakingCharacterKey: Hikari
       activeCharacterKeys: Hikari Biasa
       iconSprite: {fileID: 0}
-      backgroundImage: {fileID: 21300000, guid: f55b01f803d771548901bb361fe3bb04, type: 3}
+      backgroundImage: {fileID: 21300000, guid: 7f5483e24d566cc4b9ccf586e5935cf1, type: 3}
       changeBackground: 1
     - sentenceText: Aku takut aku merepotkan
       voiceClip: {fileID: 0}
       speakingCharacterKey: Hikari
       activeCharacterKeys: Hikari Biasa
       iconSprite: {fileID: 0}
-      backgroundImage: {fileID: 21300000, guid: f55b01f803d771548901bb361fe3bb04, type: 3}
+      backgroundImage: {fileID: 21300000, guid: 7f5483e24d566cc4b9ccf586e5935cf1, type: 3}
       changeBackground: 1
     - sentenceText: Coba ku pikir lagi
       voiceClip: {fileID: 8300000, guid: 972e6f94502e75e41afaeee18fc2dcb5, type: 3}
