@@ -1,0 +1,13 @@
+Start,End,Duration,Media,Text,CapCut effect,Transition,Audio cue
+00:00.0,00:03.0,3.0,01_title_opening.png,TIGA SENYUMAN / SATU HATI,Slow zoom in + sparkle overlay,Fade in,Piano/music box intro
+00:03.0,00:06.5,3.5,02_school_intro.png,Semua dimulai dari hari biasa di sekolah.,Pan right 8%,White flash,Beat starts
+00:06.5,00:10.0,3.5,03_three_choices.png,Tiga senyuman. Tiga jalan cerita.,Camera shake soft + pop text,Slide left,Upbeat visual novel beat
+00:10.0,00:13.5,3.5,04_hikari_dialog.png,Kalau kamu memilihku... jangan menyesal ya.,Zoom to face,Cross dissolve,Character chime
+00:13.5,00:17.0,3.5,05_miyu_dialog.png,Aku cuma ingin kamu jujur kali ini.,Zoom to face,Cross dissolve,Character chime
+00:17.0,00:20.5,3.5,06_yumi_dialog.png,Senyum itu bisa menyembunyikan banyak hal.,Zoom to face,Cross dissolve,Music begins to thin
+00:20.5,00:23.0,2.5,07_turning_point.png,TAPI...,Glitch text + blur,Hard cut,Music stop + hit
+00:23.0,00:27.0,4.0,08_glitch_classroom.png,pilihanmu tersimpan,Chromatic aberration + shake,Glitch,Low rumble
+00:27.0,00:31.0,4.0,09_dark_room.png,Kenapa kamu membuka rute itu lagi?,VHS + dark vignette,Black flash,Heartbeat
+00:31.0,00:36.0,5.0,10_festival_flash.png,ROMANCE / MYSTERY / VISUAL NOVEL,Fast cuts + glitch overlay,Flash,Trailer rise
+00:36.0,00:40.0,4.0,11_release_card.png,DEMO SEGERA HADIR,Text bounce + particles,Fade to black,Final hit
+00:40.0,00:45.0,5.0,12_end_card.png,WISHLIST / FOLLOW,Slow zoom out,Fade out,Reverb tail
